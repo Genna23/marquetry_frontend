@@ -25,7 +25,8 @@ export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi();
 
   const { data } = await useStoryblokApi().get(`cdn/links`, {
-    version: "published",
+    version: process.env.STORYBLOK_IS_PREVIEW === 'true' ? 'draft' : 'published',
+    resolve_links: 'url',
   });
 
   return Object.values(data.links).filter((e) => e.slug !== "config").map((e) => {
