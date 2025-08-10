@@ -2,13 +2,15 @@
 import { defineConfig } from 'astro/config';
 import { storyblok }  from '@storyblok/astro';
 
+import netlify from '@astrojs/netlify/functions'; 
+
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 import { loadEnv } from 'vite';
 
 import tailwindcss from '@tailwindcss/vite';
 
-const { STORYBLOK_DELIVERY_API_TOKEN } = loadEnv(
+const { STORYBLOK_DELIVERY_API_TOKEN, STORYBLOK_IS_PREVIEW } = loadEnv(
 	import.meta.env.MODE,
 	process.cwd(),
 	'',
@@ -21,7 +23,7 @@ export default defineConfig({
   },
   integrations: [
     storyblok({
-      bridge: process.env.STORYBLOK_IS_PREVIEW === 'true' ? true : false,
+      bridge: STORYBLOK_IS_PREVIEW === 'true' ? true : false,
       accessToken: STORYBLOK_DELIVERY_API_TOKEN,
       apiOptions: { region: process.env.STORYBLOK_REGION ?? 'eu' },
       components: {                
@@ -35,5 +37,6 @@ export default defineConfig({
       },
     })
   ],
-  output: process.env.STORYBLOK_IS_PREVIEW === 'true' ? 'server' : 'static',
+  output: STORYBLOK_IS_PREVIEW === 'true' ? 'server' : 'static',
+  adapter: netlify(),
 });
