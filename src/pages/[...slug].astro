@@ -28,7 +28,7 @@ export async function getStaticPaths() {
     version: "published",
   });
 
-  return Object.values(data.links).map((e) => {
+  return Object.values(data.links).filter((e) => e.slug !== "config").map((e) => {
     return {
       params: { slug: e.slug === "home" ? undefined : e.slug },
       props: { slug: e.slug },
