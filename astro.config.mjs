@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import { storyblok }  from '@storyblok/astro';
 
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
 import { loadEnv } from 'vite';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -15,7 +17,7 @@ const { STORYBLOK_DELIVERY_API_TOKEN } = loadEnv(
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss(), basicSsl()]
   },
   integrations: [
     storyblok({
@@ -31,5 +33,5 @@ export default defineConfig({
         materials: 'components/home/Materials',
       },
     })
-  ]
+  ],
 });

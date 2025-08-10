@@ -2,6 +2,8 @@
 import Navbar from "../partials/base/Navbar.astro"
 import "../styles/global.css"
 
+import StoryblokBridge from "../StoryblokBridge.astro"
+
 const { title = 'Маркетри', nav_links = [], logo, phone } = Astro.props
 
 ---
@@ -13,6 +15,7 @@ const { title = 'Маркетри', nav_links = [], logo, phone } = Astro.props
   </head>
   <body>
     <main>
+      <StoryblokBridge onUpdate={() => location.reload()} />
       <Navbar nav_links={nav_links} {logo} {phone}/>
       <slot />
     </main>

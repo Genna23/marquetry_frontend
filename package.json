@@ -13,5 +13,8 @@
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.12.8",
     "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.1.0"
   }
 }
