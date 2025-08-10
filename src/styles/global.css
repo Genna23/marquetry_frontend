@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat/Montserrat.ttf') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+@theme {
+    --color-main-dark: #383329;
+    --color-main-hover-dark: #2b2a27;
+  --color-main-light: #F9F4EA;
+  --color-main-green: #3A4E33;
+  --color-main-hover-green: #374B30;
+  --color-main-white-green: #EEFFE7;
+  --color-main-hover-white-green: #C6D7BF;
+  
+}
+
+html { scroll-behavior: smooth;}
+
+body {
+    font-size: 18px;
+    font-family: Montserrat, 'Sans-serif';
+    @apply text-main-dark tracking-wide;
+}
+
+.layout {
+    @apply w-[90%] sm:w-[90%] mx-auto;
+}
+
+.button {
+    @apply rounded-xl px-6 py-2 uppercase font-semibold transition-colors duration-200;
+}
+
+.button.transperent {
+    @apply border-[1px] border-main-dark text-main-dark hover:bg-main-dark hover:text-white
+}
+
+.button.green {
+    @apply text-white bg-main-green hover:bg-main-hover-green hover:text-white;
+}

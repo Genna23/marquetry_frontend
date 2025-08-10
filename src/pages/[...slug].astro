@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { useStoryblokApi } from "@storyblok/astro";
+
+import getPictureValues from '../lib/picture'
+
+const { slug } = Astro.params;
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get(`cdn/stories/${slug || "home"}`, {
+  version: "draft",
+});
+
+const config = await storyblokApi.get(`cdn/stories/config`, {
+  version: "draft",
+});
+
+const base = config.data.story.content
+
+const story = data.story;
+
+export async function getStaticPaths() {
+  const storyblokApi = useStoryblokApi();
+
+  const { data } = await useStoryblokApi().get(`cdn/links`, {
+    version: "published",
+  });
+
+  return Object.values(data.links).map((e) => {
+    return {
+      params: { slug: e.slug === "home" ? undefined : e.slug },
+      props: { slug: e.slug },
+    };
+  });
+}
+
+const { content } = story;
+
+const nav_links = content.body
+  .filter((e) => e.show_in_nav === true)
+  .map((e) => ({
+    name: e.nav_name,
+    slug: `#${e.component}`,
+  }));
+
+---
+
+<Base nav_links={nav_links} logo={getPictureValues(base.logo)} phone={base.phone}>
+  <StoryblokComponent blok={content} />
+</Base>

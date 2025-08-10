@@ -1,0 +1,20 @@
+---
+import Navbar from "../partials/base/navbar.astro"
+import "../styles/global.css"
+
+const { title = 'Маркетри', nav_links = [], logo, phone } = Astro.props
+
+---
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <Navbar nav_links={nav_links} {logo} {phone}/>
+      <slot />
+    </main>
+  </body>
+</html>

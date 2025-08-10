@@ -1,0 +1,13 @@
+---
+
+const {href, style} = Astro.props
+
+---
+
+<a
+    {href}
+    class="button"
+    class:list={style}
+>
+    <slot/>
+</a>

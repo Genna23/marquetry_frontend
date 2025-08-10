@@ -1,0 +1,109 @@
+---
+
+const { nav_links = [], logo, phone } = Astro.props 
+
+const {src, alt, width, height} = logo
+
+import { Picture } from 'astro:assets';
+
+import Button from './Button.astro'
+
+---
+
+<header class="sticky top-0 z-50 bg-main-light rounded-b-2xl">
+  <div class="layout">
+    <div class="relative flex items-center justify-between py-3 md:py-4">
+      <!-- Бургер (mobile) -->
+      <button id="burgerBtn"
+              class="md:hidden p-2 cursor-pointer relative w-7 h-[18px] aria-expanded:false"
+              aria-label="Открыть меню"
+              aria-controls="mobileMenu"
+              aria-expanded="false">
+        <span class="bar absolute left-0 top-0 block w-7 h-[2px] rounded-full bg-[#2b2a27]"></span>
+        <span class="bar absolute left-0 top-[8px] block w-7 h-[2px] rounded-full bg-[#2b2a27]"></span>
+        <span class="bar absolute left-0 top-[16px] block w-7 h-[2px] rounded-full bg-[#2b2a27]"></span>
+      </button>
+
+      <!-- Логотип по центру -->
+      <a href="/" class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 inline-flex items-center md:w-5 w-4">
+        <Picture {src} class="max-w-full" formats={['avif', 'webp']} {alt} width=`${width}px` height=`${height}px` />
+      </a>
+
+      <!-- Навигация (desktop) -->
+      <nav class="hidden md:block">
+        <ul class="flex items-center gap-8 font-semibold text-hover-dark">
+          {
+            nav_links.map(e => <li><a href={e.slug} class="hover:opacity-70 transition-opacity duration-200">{e.name}</a></li>)
+          }
+        </ul>
+      </nav>
+
+      <!-- CTA + телефон (desktop) -->
+      <div class="hidden md:flex items-center gap-12">
+        <Button href={`tel:${phone.replace(/\s+/g, '')}`} style="transperent font-semibold">Связаться</Button>
+        <a href="tel:+79993992939" class="font-semibold text-main-dark">{phone}</a>
+      </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <nav id="mobileMenu"
+         class="md:hidden origin-top overflow-hidden max-h-0 opacity-0 -translate-y-2 
+                transition-[max-height,opacity,transform] duration-[450ms] ease-in-out will-change-transform">
+      <ul class="flex flex-col gap-3 py-3 font-semibold text-[#2b2a27]">
+        {
+            nav_links.map(e => <li><a href={e.slug} class="block px-1 py-2 hover:opacity-70">{e.name}</a></li>)
+          }
+        <li class="pt-1">
+          <a href="#contact" class="rounded-xl border border-[#2b2a27] px-5 py-2 font-semibold text-[#2b2a27] hover:bg-[#2b2a27] hover:text-white transition-colors duration-200">
+            СВЯЗАТЬСЯ
+          </a>
+        </li>
+        <li><a href="tel:+79993992939" class="block px-1 py-2">+7 999 399 29 39</a></li>
+      </ul>
+    </nav>
+  </div>
+
+</header>
+
+
+<style>
+    /* Бургер: базовые переходы для трёх полос */
+    #burgerBtn .bar {
+      transition: transform 450ms ease-in-out, opacity 450ms ease-in-out, top 450ms ease-in-out;
+      transform-origin: center;
+    }
+    /* Состояние ОТКРЫТО (крестик) — навешивается классом .open */
+    #burgerBtn.open .bar:nth-child(1) { top: 8px; transform: rotate(45deg); }
+    #burgerBtn.open .bar:nth-child(2) { opacity: 0; }
+    #burgerBtn.open .bar:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+    /* Меню: плавное раскрытие/закрытие */
+    #mobileMenu.open { max-height: 80vh; opacity: 1; transform: translateY(0); }
+  </style>
+
+  <!-- переключение и автозакрытие по якорям -->
+  <script>
+    (function () {
+      const btn  = document.getElementById('burgerBtn');
+      const menu = document.getElementById('mobileMenu');
+
+      function toggle(open) {
+        const willOpen = open ?? !btn.classList.contains('open');
+        btn.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', String(willOpen));
+        menu.classList.toggle('open', willOpen);
+      }
+
+      btn.addEventListener('click', () => toggle());
+
+      // Закрывать при клике по якорной ссылке
+      menu.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => toggle(false));
+      });
+
+      // Закрывать по Esc
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggle(false);
+      });
+    })();
+  </script>
