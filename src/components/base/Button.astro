@@ -1,0 +1,11 @@
+---
+
+import Button from '../../partials/base/Button.astro'
+
+const {blok, classes} = Astro.props
+
+const {label, style, link, icon} = blok
+
+---
+
+<Button {style} href={link.cashed_url} {icon} {classes}>{label}</Button>

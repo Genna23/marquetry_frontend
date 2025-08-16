@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^6.5.6",
+    "@splidejs/splide": "^4.1.4",
     "@storyblok/astro": "^7.2.3",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.12.8",
+    "astro-icon": "^1.1.5",
+    "astro-splide": "^2.0.0",
+    "clone-deep": "^4.0.1",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

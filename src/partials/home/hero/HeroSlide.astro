@@ -1,0 +1,36 @@
+---
+const { slide } = Astro.props;
+
+import { renderRichTextWithSpan } from "../../../lib/renderRichTextWithSpan";
+
+const { title, description, button, text_style } = slide
+
+const style = text_style !== 'default' ? `text-white` : ''
+
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+
+---
+
+<div class:list={["content-overlay h-full p-10 flex flex-col justify-between no-drag"]}>
+    <div class={style}>
+        <h2 set:html={renderRichTextWithSpan(title)}/>
+        <p>
+            {description}
+        </p>
+    </div>
+    <div class="flex justify-end">
+        <StoryblokComponent blok={button[0]} />
+    </div>
+</div>
+
+
+<style>
+
+    .no-drag {
+        user-select: text !important;
+        -webkit-user-select: text !important;
+        pointer-events: auto !important;
+    }
+
+</style>

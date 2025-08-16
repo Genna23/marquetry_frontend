@@ -1,0 +1,14 @@
+---
+const { onUpdate } = Astro.props
+---
+
+<script is:inline>
+  import('@storyblok/js').then(({ StoryblokBridge }) => {
+    if (typeof window !== 'undefined') {
+      const sbBridge = new StoryblokBridge()
+      sbBridge.on(['input', 'published', 'change'], () => {
+        onUpdate && onUpdate()
+      })
+    }
+  })
+</script>

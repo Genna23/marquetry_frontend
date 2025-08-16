@@ -2,6 +2,9 @@
 
 const {blok} = Astro.props
 
+import About from "../../partials/home/about/About.astro"
+
+
 ---
 
-<h2>{blok.title}</h2>
+<About {...blok}/>

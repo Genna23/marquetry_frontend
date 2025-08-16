@@ -12,7 +12,7 @@ import Button from './Button.astro'
 
 <header class="bg-main-light rounded-b-2xl">
   <div class="layout">
-    <div class="relative flex items-center justify-between py-3 md:py-4">
+    <div class="relative flex items-center justify-between h-20">
       <!-- Бургер (mobile) -->
       <button id="burgerBtn"
               class="md:hidden p-2 cursor-pointer relative w-7 h-[18px] aria-expanded:false"
@@ -26,7 +26,7 @@ import Button from './Button.astro'
 
       <!-- Логотип по центру -->
       <a href="/" class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 inline-flex items-center md:w-5 w-4">
-        <Picture {src} class="max-w-full" formats={['avif', 'webp']} {alt} width=`${width}px` height=`${height}px` />
+        <Picture {...logo} class="max-w-full" formats={['avif', 'webp']}  />
       </a>
 
       <!-- Навигация (desktop) -->

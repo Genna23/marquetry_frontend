@@ -1,0 +1,71 @@
+---
+
+const {video, title, description, button} = Astro.props
+import { Icon } from 'astro-icon/components'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+---
+
+<section class="py-10 bg-main-light rounded-2xl">
+    <div class="layout flex items-center gap-4">
+        <div class="relative w-1/2 max-w-full cursor-pointer" id="overlay" style="aspect-ratio: 16/9;">
+    <video
+        id="myVideo"
+        class="absolute top-0 left-0 w-full h-full rounded-lg object-cover"
+        preload="none"
+        poster={video.filename}
+    >
+        <source src="/videos/about.mp4" type="video/mp4" />
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <!-- Overlay кнопка -->
+    <button
+        id="playButton"
+        class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 rounded-lg"
+        style="font-size: 64px; color: white;"
+        aria-label="Play Video"
+    >
+        <Icon name="play" /> 
+    </button>
+</div>
+<div class="w-1/2 space-y-4">
+
+    <div>
+        <h2>{title}</h2>
+<p>
+            {description}
+        </p>
+    </div>
+    <StoryblokComponent classes="inline-block" blok={button[0]} />
+        
+</div>
+    </div>
+</section>
+
+<script>
+const video = document.getElementById('myVideo');
+const button = document.getElementById('playButton');
+const overlay = document.getElementById('overlay');
+
+video.volume = 0.2; 
+
+// Клик по overlay-кнопке
+overlay.addEventListener('click', () => {
+    video.play();                  // запускаем видео
+    video.setAttribute('controls', ''); // показываем controls
+    button.remove();               // удаляем кнопку навсегда
+    
+}, { once: true });
+</script>
+
+<style>
+  button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: transform 0.2s;
+  }
+  button:hover {
+    transform: scale(1.1);
+  }
+</style>

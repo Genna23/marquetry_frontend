@@ -5,7 +5,7 @@ export default function getPictureValues({filename, alt}) {
     return {
         src: filename,
         alt,
-        witdh,
-        height
+        width: witdh+'px',
+        height: height+'px'
     }
 }

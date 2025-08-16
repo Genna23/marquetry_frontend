@@ -2,6 +2,5 @@
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 const { blok } = Astro.props as { blok: { body?: any[] } }
 
-
 ---
 {blok.body?.map((b) => <StoryblokComponent blok={b} />)}

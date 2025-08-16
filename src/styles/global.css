@@ -12,17 +12,46 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Anticva';
+  src: url('/fonts/Anticva-Regular.otf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
+:root {
+  --color-main-brown: #7D4B31;
+  --color-main-light: #F9F4EA;
+}
+
+.splide__track { height: calc(100% - 2.5rem); /* 2.5rem = ~40px на точки */ }
+
+ul.splide__pagination {
+    position: static !important;
+    @apply h-10;
+  }
+
+  h2 {
+    font-family: Anticva, 'Sans-serif';
+    font-size: 60px;
+    line-height: 1.2;
+  }
+
+  /* p {
+    font-size: 24px;
+  } */
 
 @theme {
     --color-main-dark: #383329;
     --color-main-hover-dark: #2b2a27;
   --color-main-light: #F9F4EA;
   --color-main-green: #3A4E33;
-  --color-main-hover-green: #374B30;
+  --color-main-white: #FFFFFF;
+  --color-main-hover-green: #304429;
   --color-main-white-green: #EEFFE7;
   --color-main-hover-white-green: #C6D7BF;
-  
+  --color-main-brown: #7D4B31;
 }
 
 html { scroll-behavior: smooth;}
@@ -38,13 +67,17 @@ body {
 }
 
 .button {
-    @apply rounded-xl px-6 py-2 uppercase font-semibold transition-colors duration-200;
+    @apply rounded-xl px-6 py-2 uppercase transition-colors duration-200 cursor-pointer;
 }
 
-.button.transperent {
+.button.default, .button.transperent {
     @apply border-[1px] border-main-dark text-main-dark hover:bg-main-dark hover:text-white
 }
 
 .button.green {
     @apply text-white bg-main-green hover:bg-main-hover-green hover:text-white;
+}
+
+u {
+  text-decoration-color: currentColor !important;
 }

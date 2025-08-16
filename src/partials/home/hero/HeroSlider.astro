@@ -1,0 +1,64 @@
+---
+import { Splide, SplideSlide } from "astro-splide";
+
+import "@splidejs/splide/css";
+import HeroSlide from "./HeroSlide.astro";
+
+const { slides } = Astro.props;
+
+const options = {
+    type: "slide",
+    perPage: 2,
+    speed: 1000,
+    perMove: 1,
+    gap: "1rem",
+    pagination: true,
+    drag: true,
+    arrows: false,
+    breakpoints: {
+        768: {
+            perPage: 1,
+        },
+    },
+};
+
+---
+
+<Splide options={options} class="h-full">
+    {
+        slides.map((slide) => (
+        
+            <SplideSlide
+                class:list={["h-full rounded-2xl"]}
+                style={`background-image: url(${slide.bg_image.filename})`}
+            >
+                <HeroSlide {slide} />
+            </SplideSlide>
+        ))
+    }
+</Splide>
+
+<style lang="css">
+
+    :global(.splide__pagination) {
+        bottom: -2rem !important; /* Размещаем контейнер ниже слайдов */
+    }
+    :global(.splide__slide.selectable-slide) {
+        user-select: auto !important;
+    }
+    /* Стили для каждой точки */
+    :global(.splide__pagination__page) {
+        background: var(--color-main-light) !important;
+        opacity: 0.8 !important;
+        width: 10px !important; /* Размер */
+        height: 10px !important;
+        margin: 0 4px !important; /* Отступы между точками */
+    }
+
+    /* Стили для активной точки */
+    :global(.splide__pagination__page.is-active) {
+        background: var(--color-main-brown) !important;
+        opacity: 1 !important;
+        transform: scale(1); /* Немного увеличиваем активную точку */
+    }
+</style>

@@ -1,13 +1,30 @@
 ---
 
-const {href, style} = Astro.props
+import { Icon } from 'astro-icon/components'
+
+const {href='/', style='default', icon='default', classes=''} = Astro.props
+
+
 
 ---
 
 <a
     {href}
-    class="button"
-    class:list={style}
+    class="button flex items-center gap-3"
+    class:list={[style ? style : 'default', classes]}
 >
-    <slot/>
+<slot />
+
+{
+
+    icon !== 'default' ? <Icon name={icon} /> : ''
+
+}
+
 </a>
+
+<style>
+
+
+    
+</style>
