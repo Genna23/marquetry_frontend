@@ -16,7 +16,7 @@ const options = {
     drag: true,
     arrows: false,
     breakpoints: {
-        768: {
+        1024: {
             perPage: 1,
         },
     },
@@ -30,7 +30,7 @@ const options = {
         
             <SplideSlide
                 class:list={["h-full rounded-2xl"]}
-                style={`background-image: url(${slide.bg_image.filename})`}
+                style={`background: url(${slide.bg_image.filename}) no-repeat center center fixed;   background-size: cover;`}
             >
                 <HeroSlide {slide} />
             </SplideSlide>

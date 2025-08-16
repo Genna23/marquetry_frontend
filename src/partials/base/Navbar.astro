@@ -15,7 +15,7 @@ import Button from './Button.astro'
     <div class="relative flex items-center justify-between h-20">
       <!-- Бургер (mobile) -->
       <button id="burgerBtn"
-              class="md:hidden p-2 cursor-pointer relative w-7 h-[18px] aria-expanded:false"
+              class="2xl:hidden p-2 cursor-pointer relative w-7 h-[18px] aria-expanded:false"
               aria-label="Открыть меню"
               aria-controls="mobileMenu"
               aria-expanded="false">
@@ -25,12 +25,12 @@ import Button from './Button.astro'
       </button>
 
       <!-- Логотип по центру -->
-      <a href="/" class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 inline-flex items-center md:w-5 w-4">
+      <a href="/" class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 inline-flex items-center 2xl:w-5 w-4">
         <Picture {...logo} class="max-w-full" formats={['avif', 'webp']}  />
       </a>
 
       <!-- Навигация (desktop) -->
-      <nav class="hidden md:block">
+      <nav class="hidden 2xl:block">
         <ul class="flex items-center gap-8 font-semibold text-hover-dark">
           {
             nav_links.map(e => <li><a href={e.slug} class="hover:opacity-70 transition-opacity duration-200">{e.name}</a></li>)
@@ -39,7 +39,7 @@ import Button from './Button.astro'
       </nav>
 
       <!-- CTA + телефон (desktop) -->
-      <div class="hidden md:flex items-center gap-12">
+      <div class="hidden lg:flex items-center gap-12">
         <Button href={`tel:${phone.replace(/\s+/g, '')}`} style="transperent font-semibold">Связаться</Button>
         <a href="tel:+79993992939" class="font-semibold text-main-dark">{phone}</a>
       </div>
@@ -47,18 +47,18 @@ import Button from './Button.astro'
 
     <!-- Мобильное меню -->
     <nav id="mobileMenu"
-         class="md:hidden origin-top overflow-hidden max-h-0 opacity-0 -translate-y-2 
+         class="2xl:hidden origin-top overflow-hidden max-h-0 opacity-0 -translate-y-2 
                 transition-[max-height,opacity,transform] duration-[450ms] ease-in-out will-change-transform">
       <ul class="flex flex-col gap-3 py-3 font-semibold text-[#2b2a27]">
         {
             nav_links.map(e => <li><a href={e.slug} class="block px-1 py-2 hover:opacity-70">{e.name}</a></li>)
           }
-        <li class="pt-1">
+        <li class="pt-1 flex lg:hidden">
           <a href="#contact" class="rounded-xl border border-[#2b2a27] px-5 py-2 font-semibold text-[#2b2a27] hover:bg-[#2b2a27] hover:text-white transition-colors duration-200">
             СВЯЗАТЬСЯ
           </a>
         </li>
-        <li><a href="tel:+79993992939" class="block px-1 py-2">+7 999 399 29 39</a></li>
+        <li class="flex lg:hidden"><a href="tel:+79993992939" class="block px-1 py-2">+7 999 399 29 39</a></li>
       </ul>
     </nav>
   </div>
