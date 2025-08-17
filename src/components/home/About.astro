@@ -1,12 +1,11 @@
 ---
+const { blok } = Astro.props;
 
-const {blok} = Astro.props
+import About from "../../partials/home/about/About.astro";
 
-import About from "../../partials/home/about/About.astro"
-
-import { storyblokEditable } from '@storyblok/astro'
-
-
+import { storyblokEditable } from "@storyblok/astro";
 ---
 
-<About {...blok} {...storyblokEditable(blok)}/>
+<section {...storyblokEditable(blok)} class="py-10 bg-main-light rounded-2xl" id={blok.component}>
+    <About {...blok} />
+</section>

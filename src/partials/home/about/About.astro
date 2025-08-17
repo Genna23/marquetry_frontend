@@ -1,10 +1,13 @@
 ---
+
 const { video, title, description, button } = Astro.props;
 import { Icon } from "astro-icon/components";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+
 ---
 
-<section class="py-10 bg-main-light rounded-2xl" >
+
     <div class="layout flex flex-col-reverse xl:flex-row xl:items-center items-start xl:gap-4">
         <StoryblokComponent classes="inline-block xl:hidden mt-4" blok={button[0]} />
         <div
@@ -42,7 +45,6 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
             <StoryblokComponent classes="xl:inline-block hidden" blok={button[0]} />
         </div>
     </div>
-</section>
 
 <script>
     const video = document.getElementById("myVideo");

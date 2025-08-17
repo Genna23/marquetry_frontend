@@ -1,7 +1,13 @@
 ---
-const { blok } = Astro.props;
 
 import Hero from "../../partials/home/hero/Hero.astro";
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok } = Astro.props;
 ---
 
-<Hero slides={blok.slides} />
+<section class="h-[calc(100vh-5rem-2.5rem)] pt-10" {...storyblokEditable(blok)}>
+
+    <Hero slides={blok.slides} />
+        
+</section>

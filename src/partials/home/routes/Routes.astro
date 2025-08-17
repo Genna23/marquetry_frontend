@@ -1,0 +1,52 @@
+---
+
+import Route from "./Route.astro"
+import RouteCard from "./RouteCard.astro"
+
+const {title, routes, cards} = Astro.props
+
+---
+
+<div class="layout">
+
+    <div class="space-y-2">
+
+        <div class="w-full text-center">
+
+    <h2>{title}</h2>
+
+    </div>
+
+    <div class="flex lg:flex-row flex-col gap-4">
+
+        {routes.map(route => (
+            <Route {...route}/>
+        ))}
+                    
+        
+                
+    </div>
+
+        <div>
+
+            <h3>*Ар-деко и классицизм - не про вас?</h3>
+            <p>Мы не ограничены в шаблонах</p>
+
+        </div>
+
+
+        <div>
+
+            {
+
+                cards.map(card => (
+                    <RouteCard {...card} />
+                ))
+
+            }
+
+        </div>
+
+    </div>
+
+</div>

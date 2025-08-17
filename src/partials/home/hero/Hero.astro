@@ -4,8 +4,6 @@ import HeroSlider from "./HeroSlider.astro";
 const { slides } = Astro.props;
 ---
 
-<section class="h-[calc(100vh-5rem-2.5rem)] mt-10">
-    <div class="layout h-full">
-        <HeroSlider {slides} />
-    </div>
-</section>
+<div class="layout h-full">
+    <HeroSlider {slides} />
+</div>

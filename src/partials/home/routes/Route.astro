@@ -1,0 +1,21 @@
+---
+
+const {title, description, link, bg_image} = Astro.props
+
+import { renderRichText } from '@storyblok/astro'
+ 
+---
+
+<div class="space-y-4 w-full lg:w-1/2 p-5 md:p-10 xl:p-20 flex flex-col items-center text-white rounded-2xl" style={`background: url(${bg_image.filename}) no-repeat center center;   background-size: cover;`}>
+    <h3>{title}</h3>
+    <div set:html={renderRichText(description)} class="desciption space-y-[-1rem] xl:w-3/4 lg:w-4/5 w-full"></div>
+    <div>
+        <a href={link.cached_url} target="_blank" class="font-semibold underline cursor-pointer">Скачать примеры работ</a>
+    </div>
+</div>
+
+<style>
+
+
+        
+</style>

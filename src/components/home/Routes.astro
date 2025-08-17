@@ -1,10 +1,14 @@
 ---
 
-const {blok} = Astro.props
-
 import Routes from "../../partials/home/routes/Routes.astro"
+import { storyblokEditable } from "@storyblok/astro";
 
+const {blok} = Astro.props
 
 ---
 
-<Routes {...blok}/>
+<section {...storyblokEditable(blok)} class="py-10" id={blok.component}>
+
+    <Routes {...blok}/>
+
+</section>

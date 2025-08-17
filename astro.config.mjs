@@ -24,7 +24,7 @@ export default defineConfig({
     plugins: [tailwindcss(), basicSsl()]
   },
   integrations: [storyblok({
-    bridge: STORYBLOK_IS_PREVIEW === 'true' ? true : false,
+    // bridge: STORYBLOK_IS_PREVIEW === 'true' ? true : false,
     accessToken: STORYBLOK_DELIVERY_API_TOKEN,
     apiOptions: { region: process.env.STORYBLOK_REGION ?? 'eu' },
     components: {                
