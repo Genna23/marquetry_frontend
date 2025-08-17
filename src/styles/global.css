@@ -34,7 +34,7 @@ ul.splide__pagination {
 
   h2 {
     font-family: Anticva, 'Sans-serif';
-    font-size: 60px;
+    @apply text-[40px] md:text-[60px];
     line-height: 1.2;
   }
 
