@@ -34,7 +34,7 @@ ul.splide__pagination {
 
   h2 {
     font-family: Anticva, 'Sans-serif';
-    @apply text-[40px] md:text-[60px];
+    @apply text-[35px] md:text-[60px];
     line-height: 1.2;
   }
 
@@ -57,9 +57,8 @@ ul.splide__pagination {
 html { scroll-behavior: smooth;}
 
 body {
-    font-size: 18px;
     font-family: Montserrat, 'Sans-serif';
-    @apply text-main-dark tracking-wide;
+    @apply text-main-dark tracking-wide text-[16px]  md:text-[18px];
 }
 
 .layout {
