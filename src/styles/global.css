@@ -44,6 +44,12 @@ ul.splide__pagination {
     line-height: 1.2;
   }
 
+  h4 {
+    font-family: Anticva, 'Sans-serif';
+    @apply text-[20px] md:text-[30px];
+    line-height: 1.2;
+  }
+
   /* p {
     font-size: 24px;
   } */
@@ -77,6 +83,10 @@ body {
 
 .button.default, .button.transperent {
     @apply border-[1px] border-main-dark text-main-dark hover:bg-main-dark hover:text-white
+}
+
+.button.transperent-white {
+  @apply border-[1px] border-main-white text-main-white hover:bg-main-white hover:text-main-dark;
 }
 
 .button.green {

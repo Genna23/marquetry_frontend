@@ -1,0 +1,15 @@
+---
+
+    import Services from "../../partials/home/services/Services.astro";
+
+    import { storyblokEditable } from "@storyblok/astro";
+
+    const { blok } = Astro.props
+
+---
+
+<section class="py-10" {...storyblokEditable(blok)} id={blok.component}>   
+
+    <Services {...blok} />
+
+</section>

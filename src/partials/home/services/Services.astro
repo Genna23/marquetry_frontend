@@ -1,0 +1,29 @@
+---
+import ServiceCard from "./ServiceCard.astro"
+
+
+    const {title, cards} = Astro.props
+
+---
+
+
+<div class="layout">
+
+    <div>
+
+        <h2>{title}</h2>
+
+    </div>
+
+    <div class="grid grid-cols-3 gap-4">
+
+        {
+
+        cards.map((card, index) => (<ServiceCard {...card} {index}/>))
+
+    }
+
+    </div>
+
+
+</div>
