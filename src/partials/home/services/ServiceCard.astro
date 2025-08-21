@@ -1,49 +1,61 @@
 ---
-
-
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-const { title, description, price, button, style, style_text, bg_image, position_x, position_y, bg_full, index} = Astro.props
+const {
+    title,
+    description,
+    price,
+    button,
+    style,
+    bg_image,
+    position_x,
+    position_y,
+    bg_full,
+    index,
+    bg_size,
+} = Astro.props;
 
 const patternIndex = index % 7;
 
-  const colClass = (patternIndex === 0 || patternIndex === 2) ? 'col-span-2' : '';
+const colClass = patternIndex === 0 || patternIndex === 3 ? "xl:col-span-2" : "";
 
-  const bg_style = !bg_full ? `background-color: #F9F4EA; background-image: url(${bg_image.filename}); background-repeat: no-repeat; background-position: ${position_x}% ${position_y}%; background-size: contain;` : `background: url(${bg_image.filename}) no-repeat center center;   background-size: cover;`
+const bg_style = !bg_full
+    ? `background-color: #F9F4EA; background-image: url(${bg_image.filename}); background-repeat: no-repeat; background-position: ${position_x}% ${position_y}%; background-size: ${bg_size}px;`
+    : `background: url(${bg_image.filename}) no-repeat center center;   background-size: cover;`;
 
-    if (style && bg_image) {
-        const style_color = style === 'white' ? 'border-2 border-main-dark' : '!bg-main-light'
-    }
+const styles = {
+    white: "text-white",
+    transperent: "border-2 border-main-dark"
+};
 
-    const style_color = ''
+let classes;
 
+if (styles.hasOwnProperty(style)) {
+    classes = styles[style];
+}
 
 ---
 
-<div class:list={['rounded-2xl p-10 gap-10 flex flex-col justify-between', style_color, colClass]}
-style={[bg_style]}>
-
-    <div class={style_text === "white" ? 'text-main-white' : ''}>
-    
+<div
+    class:list={[
+        "rounded-2xl p-10 gap-10 flex flex-col justify-between",
+        colClass,
+        classes,
+    ]}
+    style={bg_style}
+>
+    <div class={""}>
         <h3>{title}</h3>
-    <p>{description}</p>
-    
-    </div> 
-
-    <div class:list={["flex justify-between items-end", style_text === "white" ? 'text-main-white' : '']}>
-
-        <div>
-
-            <h4>{price}</h4>
-
-        </div>
-
-        <div>
-
-            <StoryblokComponent blok={button[0]} />
-
-        </div>
-
+        <p>{description}</p>
     </div>
 
+    <div class:list={["flex justify-between items-end"]}>
+        <div>
+            <h4 class={style === 'white' ? 'text-white' : 'text-main-brown'}>{price}</h4>
+        </div>
+
+        <div>
+            <StoryblokComponent blok={button[0]} />
+        </div>
+    </div>
 </div>

@@ -89,6 +89,10 @@ body {
   @apply border-[1px] border-main-white text-main-white hover:bg-main-white hover:text-main-dark;
 }
 
+.button.light {
+  @apply border-[1px] border-main-dark text-main-dark bg-main-light hover:bg-[#F4E7D4] hover:text-main-dark;
+}
+
 .button.green {
     @apply text-white bg-main-green hover:bg-main-hover-green hover:text-white;
 }
