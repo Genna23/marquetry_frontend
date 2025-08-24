@@ -1,0 +1,40 @@
+---
+
+const {title, description, cards, button, link} = Astro.props
+
+import MaterialItem from './MaterialItem.astro'
+
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+---
+
+<div class="layout">
+
+    <div class="space-y-4">
+
+        <div class="text-center ">
+            <h2>{title}</h2>
+
+        <p>{description}</p>
+        </div>
+
+         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+            {
+            cards.map(material => <MaterialItem {...material}/>)
+         }
+
+         </div>
+
+         <div class="flex justify-between">
+
+            <StoryblokComponent blok={button[0]} classes="inline-block"/>
+
+            <a href={link.cashed_url} class="font-semibold cursor-pointer underline">Скачать каталог материалов</a>
+
+         </div>
+        
+
+    </div>
+
+</div>

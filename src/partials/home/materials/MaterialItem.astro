@@ -1,0 +1,22 @@
+---
+
+import { Picture } from "astro:assets"
+import getPictureValues from "../../../lib/picture"
+
+const {image, title, text_style} = Astro.props
+
+---
+
+<div class="relative rounded-2xl overflow-hidden w-full">
+  <!-- Фото -->
+  <Picture {...getPictureValues(image)} class="w-full h-auto block" />
+
+  <!-- Glass overlay -->
+  <div
+    class="absolute bottom-0 w-full text-center py-4
+           bg-white/20 backdrop-blur-md "
+  >
+    <h4 class={text_style === "light" ? "text-white" : ""}>{title}</h4>
+  </div>
+</div>
+
