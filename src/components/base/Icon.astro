@@ -1,0 +1,11 @@
+---
+
+import Icon from '../../partials/base/Icon.astro'
+
+const {blok, classes} = Astro.props
+
+const {url, icon, style} = blok
+
+---
+
+<Icon {style} href={url.cashed_url} {icon} {classes}/>

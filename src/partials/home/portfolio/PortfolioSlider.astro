@@ -1,0 +1,58 @@
+---
+import { Splide, SplideSlide } from "astro-splide";
+
+import "@splidejs/splide/css";
+import PortfolioSlide from "./PortfolioSlide.astro";
+
+const { cards } = Astro.props;
+
+const options = {
+    type: "slide",
+    perPage: 1,
+    speed: 1000,
+    perMove: 1,
+    gap: "1rem",
+    pagination: true,
+    drag: true,
+    arrows: false,
+    breakpoints: {
+        1024: {
+            perPage: 1,
+        },
+    },
+};
+---
+
+<Splide options={options} class="h-full">
+    {
+        cards.map((card) => (
+            <SplideSlide class="h-full">
+                <PortfolioSlide {card} />
+            </SplideSlide>
+        ))
+    }
+</Splide>
+
+<style lang="css">
+    :global(.splide__pagination) {
+        bottom: -2rem !important; /* Размещаем контейнер ниже слайдов */
+    }
+    :global(.splide__slide.selectable-slide) {
+        user-select: auto !important;
+    }
+    /* Стили для каждой точки */
+    :global(.splide__pagination__page) {
+        background: #A08A61 !important;
+        opacity: 0.8 !important;
+        width: 15px !important; /* Размер */
+        height: 15px !important;
+        margin: 0 4px !important; /* Отступы между точками */
+    }
+
+    /* Стили для активной точки */
+    :global(.splide__pagination__page.is-active) {
+        background: var(--color-main-brown) !important;
+        opacity: 1 !important;
+        transform: scale(1); /* Немного увеличиваем активную точку */
+    }
+</style>

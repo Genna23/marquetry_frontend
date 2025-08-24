@@ -1,0 +1,21 @@
+---
+import PortfolioSlider from "./PortfolioSlider.astro"
+
+
+const { title, cards } = Astro.props
+---
+
+<div class="layout flex flex-col gap-4">
+
+    <div class="text-center">
+        <h2>{title}</h2>
+    </div>
+
+    <div>
+
+        <PortfolioSlider {cards} />
+
+    </div>
+
+
+</div>

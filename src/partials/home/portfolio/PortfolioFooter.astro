@@ -1,0 +1,15 @@
+---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+const { button, social_links, classes } = Astro.props;
+---
+
+<div class:list={["justify-between", classes]}>
+    <div><StoryblokComponent blok={button[0]} classes="inline-block" /></div>
+    <div class="flex gap-2">
+        {
+            social_links.map((link) => (
+                <StoryblokComponent blok={link} classes="inline-block" />
+            ))
+        }
+    </div>
+</div>

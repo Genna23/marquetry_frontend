@@ -1,0 +1,45 @@
+---
+const { card } = Astro.props;
+
+const { title, preview, image, date, place, customer, button, social_links } = card;
+
+import { Picture } from "astro:assets";
+
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import getPictureValues from "../../../lib/picture";
+
+import { renderRichText } from "@storyblok/astro";
+import { map } from "astro:schema";
+import PortfolioFooter from "./PortfolioFooter.astro";
+---
+
+<div class="flex xl:flex-row flex-col gap-4 cursor-pointer">
+    <div class="xl:w-1/2 w-full flex flex-col justify-between">
+        <div class="space-y-2">
+            <h3 class="xl:text-start text-center">{title}</h3>
+            <div>
+                <p><i>Дата: {date}</i></p>
+                <p><i>Место: {place}</i></p>
+                <p><i>Заказчик: {customer}</i></p>
+            </div>
+            <div set:html={renderRichText(preview)} />
+        </div>
+        <PortfolioFooter {button} {social_links} classes="hidden xl:flex"/>
+    </div>
+    <div class="xl:w-1/2 w-full flex flex-col gap-4">
+        <Picture
+            {...getPictureValues(image)}
+            class="cover max-h-full w-full rounded-2xl"
+            formats={["avif", "webp"]}
+        />
+        <PortfolioFooter {button} {social_links} classes="xl:hidden flex"/>
+    </div>
+</div>
+
+<style>
+    .no-drag {
+        user-select: text !important;
+        -webkit-user-select: text !important;
+        pointer-events: auto !important;
+    }
+</style>

@@ -1,0 +1,15 @@
+---
+
+    import Portfolio from "../../partials/home/portfolio/Portfolio.astro";
+
+    import { storyblokEditable } from "@storyblok/astro";
+
+    const { blok } = Astro.props
+
+---
+
+<section class="py-10 bg-main-light rounded-2xl" {...storyblokEditable(blok)} id={blok.component}>   
+
+    <Portfolio {...blok} />
+
+</section>

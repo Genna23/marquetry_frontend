@@ -1,0 +1,20 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {
+    href = "/",
+    style = "default",
+    icon = "default",
+    classes = "",
+} = Astro.props;
+
+---
+
+<a
+    {href}
+
+    class:list={[style ? style : "default", classes]}
+>
+    <Icon name={icon} class="text-[3rem]"/>
+</a>
+
