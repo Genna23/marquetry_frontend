@@ -1,15 +1,15 @@
 ---
+import Materials from "../../partials/home/materials/Materials.astro";
 
-    import Materials from "../../partials/home/materials/Materials.astro";
+import { storyblokEditable } from "@storyblok/astro";
 
-    import { storyblokEditable } from "@storyblok/astro";
-
-    const { blok } = Astro.props
-
+const { blok } = Astro.props;
 ---
 
-<section class="my-10 py-10 border-t-2 border-b-2 border-main-dark rounded-2xl" {...storyblokEditable(blok)} id={blok.component}>   
-
+<section
+    class="my-10 py-10 border-t-2 border-b-2 border-main-dark rounded-2xl"
+    {...storyblokEditable(blok)}
+    id={blok.component}
+>
     <Materials {...blok} />
-
 </section>

@@ -1,0 +1,17 @@
+---
+import Cooperation from "../../partials/home/cooperation/Cooperation.astro";
+
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok } = Astro.props;
+
+---
+
+<section
+    class="py-10 rounded-2xl"
+    {...storyblokEditable(blok)}
+    id={blok.component}
+    style={`background: url(${blok.image.filename}) no-repeat center center;   background-size: cover;`}
+>
+    <Cooperation {...blok} />
+</section>

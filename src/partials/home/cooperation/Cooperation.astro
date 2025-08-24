@@ -1,0 +1,26 @@
+---
+
+import CooperationCard from "./CooperationCard.astro"
+import CooperationFooter from "./CooperationFooter.astro"
+
+const { title, description, cta, button, cards } = Astro.props;
+---
+
+<div class="layout">
+    <div class="grid xl:grid-cols-2 grid-cols-1 gap-4">
+        <div class="flex flex-col justify-between">
+            <div>
+                <h2>{title}</h2>
+                <p>{description}</p>
+            </div>
+
+            <CooperationFooter {cta} {button} classes="hidden xl:block"/>
+        </div>
+        <div class="grid gap-4">
+
+            {cards.map(card => <CooperationCard {...card}/>)}
+            <CooperationFooter {cta} {button} classes="xl:hidden block"/>
+
+        </div>
+    </div>
+</div>

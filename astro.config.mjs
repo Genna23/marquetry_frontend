@@ -35,6 +35,8 @@ export default defineConfig({
       prices_services: 'components/home/Services',
       portfolio: 'components/home/Portfolio',
       materials: 'components/home/Materials',
+      cooperation: 'components/home/Cooperation',
+      contacts: 'components/home/Contacts',
       button: 'components/base/Button',
       social_link: 'components/base/Icon',
     },

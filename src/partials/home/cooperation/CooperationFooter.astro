@@ -1,0 +1,19 @@
+---
+
+import { renderRichText } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const {cta, button, classes}= Astro.props
+
+---
+
+<div class:list={["grid gap-2", classes]}>
+                <div set:html={renderRichText(cta)} class="text-white" />
+
+                <div>
+                    <StoryblokComponent
+                        blok={button[0]}
+                        classes="inline-flex"
+                    />
+                </div>
+            </div>
