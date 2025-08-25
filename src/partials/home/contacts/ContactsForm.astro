@@ -1,0 +1,61 @@
+---
+
+import Button from "../../base/Button.astro"
+import Checkbox from "../../base/Checkbox.astro"
+
+---
+
+<div class="xl:p-10 p-5 bg-main-light rounded-2xl space-y-4">
+
+    <h3>Cвязаться с нами</h3>
+
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-2">
+  <!-- скрытые служебные поля -->
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="hidden">
+    <label>Не заполняйте это поле: <input name="bot-field" /></label>
+  </p>
+
+  <!-- Имя -->
+  <input
+    type="text"
+    name="name"
+    required
+    class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+    placeholder="Ваше имя*"
+  />
+
+  <!-- Телефон -->
+  <input
+    type="text"
+    name="phone"
+    class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+    placeholder="Телефон"
+  />
+
+  <!-- Сообщение -->
+  <textarea
+    name="message"
+    rows="5"
+    class="bg-white p-5 w-full rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+    placeholder="Опишите задачу или проект"
+  ></textarea>
+
+  <Checkbox
+          id="agree"
+          name="agree"
+          label="Я даю согласие на обработку моих персональных данных"
+        />
+
+  <!-- Кнопка -->
+  <button
+    type="submit"
+    class="w-full button green
+           hover:bg-green-700"
+  >
+    Отправить
+  </button>
+</form>
+
+
+</div>

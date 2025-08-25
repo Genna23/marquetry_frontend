@@ -1,0 +1,81 @@
+---
+const {
+  id = 'chk-' + Math.random().toString(36).slice(2),
+  name = 'checkbox',
+  label = 'Я согласен с условиями',
+  checked = false,
+  disabled = false,
+  indeterminate = false,
+  required = false,
+} = Astro.props as {
+  id?: string;
+  name?: string;
+  label?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  required?: boolean;
+};
+---
+
+<!--
+  Доступный кастомный чекбокс на Tailwind.
+  - Белый фон, слегка скругленные углы (rounded-md)
+  - Поддержка :focus-visible, :disabled, :checked и indeterminate
+  - Без фреймворк-гидрации; JS только для indeterminate
+-->
+
+<label for={id} class="inline-flex items-center gap-3 select-none cursor-pointer">
+  <input
+    id={id}
+    name={name}
+    type="checkbox"
+    class="peer sr-only"
+    {...(checked ? { checked: true } : {})}
+    {...(disabled ? { disabled: true } : {})}
+    {...(required ? { required: true } : {})}
+    aria-checked={indeterminate ? 'mixed' : undefined}
+    data-indeterminate={indeterminate ? 'true' : 'false'}
+  />
+
+  <!-- Визуальная коробка чекбокса -->
+  <span
+    aria-hidden="true"
+    class="relative grid h-5 w-5 place-content-center rounded-md
+           border border-gray-300 bg-white 
+           transition
+           peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blue-600
+           peer-checked:bg-main-secondary peer-checked:border-main-secondary
+           peer-disabled:opacity-50 peer-disabled:cursor-not-allowed"
+  >
+    <!-- Галочка -->
+    <svg
+      viewBox="0 0 20 20"
+      class="h-3.5 w-3.5 opacity-0 scale-95 transition
+             peer-checked:opacity-100 peer-checked:scale-100 fill-white"
+    >
+      <path d="M7.629 13.233a1 1 0 0 1-1.414 0L3.88 10.898a1 1 0 1 1 1.414-1.414l1.63 1.63 4.78-4.78a1 1 0 1 1 1.414 1.415l-5.49 5.484z"/>
+    </svg>
+
+    <!-- Полоска для indeterminate -->
+    <span
+      class="absolute left-1/2 top-1/2 h-0.5 w-3 -translate-x-1/2 -translate-y-1/2
+             rounded-sm bg-white opacity-0 transition
+             peer-[data-indeterminate=true]:opacity-100
+             peer-checked:opacity-0"
+    ></span>
+  </span>
+
+  <!-- Текстовая метка -->
+  <span>{label}</span>
+</label>
+
+<!-- Устанавливаем .indeterminate на инпут, если нужно -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById(<?= JSON.stringify(id) ?>);
+    if (input && input.dataset.indeterminate === 'true') {
+      input.indeterminate = true;
+    }
+  });
+</script>

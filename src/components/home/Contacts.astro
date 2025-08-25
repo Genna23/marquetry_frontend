@@ -1,0 +1,16 @@
+---
+import Contacts from "../../partials/home/contacts/Contacts.astro";
+
+import { storyblokEditable } from "@storyblok/astro";
+
+const { blok } = Astro.props;
+
+---
+
+<section
+    class="py-10"
+    {...storyblokEditable(blok)}
+    id={blok.component}
+>
+    <Contacts {...blok} />
+</section>
