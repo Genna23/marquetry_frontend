@@ -2,10 +2,12 @@
 
 import Icon from '../../partials/base/Icon.astro'
 
-const {blok, classes} = Astro.props
+const {blok, classes, color} = Astro.props
 
 const {url, icon, style} = blok
 
+const icon_name = icon
+
 ---
 
-<Icon {style} href={url.cashed_url} {icon} {classes}/>
+<Icon {style} href={url.cashed_url} icon={icon_name} {classes}/>

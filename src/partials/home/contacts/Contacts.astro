@@ -1,21 +1,53 @@
 ---
+import { useStoryblokApi } from "@storyblok/astro";
 
-import ContactsForm from "./ContactsForm.astro"
+const storyblokApi = useStoryblokApi();
 
+import ContactsForm from "./ContactsForm.astro";
+import ContactsItem from "./ContactsItem.astro";
+
+const config = await storyblokApi.get(`cdn/stories/config`, {
+    version: "draft",
+});
+
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const base = config.data.story.content;
+
+const { phone, email, address, work_hours, socials } = base;
 ---
 
 <div class="layout">
-
-    <div class="grid grid-cols-2 gap-4">
-
+    <div class="grid xl:grid-cols-2 gap-4">
         <ContactsForm />
 
-        <div class="xl:p-10 p-5 border-2 border-main-dark rounded-2xl">
+        <div
+            class="xl:p-10 p-5 border-2 border-main-dark rounded-2xl flex flex-col justify-between"
+        >
+            <div class="space-y-2">
+                <h3>Контакты</h3>
 
-            <h3>Контакты</h3>
+                <div class="space-y-4">
+                    <ContactsItem title={phone} icon="phone" />
+                    <ContactsItem title={email} icon="email" />
+                    <ContactsItem title={address} icon="address" />
+                </div>
 
+                <div class="flex gap-4">
+                    {
+                        socials.map((link) => (
+                            <StoryblokComponent
+                                blok={link}
+                                classes="inline-block"
+                                color={true}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
+            <div class="text-center">
+                <span>{work_hours}</span>
+            </div>
         </div>
-            
     </div>
-
 </div>
