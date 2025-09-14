@@ -32,21 +32,27 @@ ul.splide__pagination {
     @apply h-10;
   }
 
-  h2 {
+  h2, .h2 {
     font-family: Anticva, 'Sans-serif';
     @apply text-[35px] md:text-[60px];
     line-height: 1.2;
   }
 
-  h3 {
+  h3, .h3 {
     font-family: Anticva, 'Sans-serif';
     @apply text-[25px] md:text-[45px];
     line-height: 1.2;
   }
 
-  h4 {
+  h4, .h4 {
     font-family: Anticva, 'Sans-serif';
     @apply text-[20px] md:text-[30px];
+    line-height: 1.2;
+  }
+
+  h5, .h5 {
+    font-family: Anticva, 'Sans-serif';
+    @apply text-[16px] md:text-[25px];
     line-height: 1.2;
   }
 

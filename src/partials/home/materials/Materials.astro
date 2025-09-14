@@ -26,9 +26,11 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
          </div>
 
-         <div class="flex justify-between">
+         <div class="flex justify-between xl:flex-row flex-col gap-2">
 
-            <StoryblokComponent blok={button[0]} classes="inline-block"/>
+            <div>
+                <StoryblokComponent blok={button[0]} classes="inline-block"/>
+            </div>
 
             <a href={link.cashed_url} class="font-semibold cursor-pointer underline">Скачать каталог материалов</a>
 

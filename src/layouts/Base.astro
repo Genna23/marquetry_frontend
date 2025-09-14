@@ -1,4 +1,5 @@
 ---
+import Footer from "../partials/base/Footer.astro"
 import Navbar from "../partials/base/Navbar.astro"
 import "../styles/global.css"
 
@@ -16,6 +17,7 @@ const { title = 'Маркетри', nav_links = [], logo, phone } = Astro.props
 
       <Navbar nav_links={nav_links} {logo} {phone}/>
       <slot />
+      <Footer />
     </main>
   </body>
 </html>
