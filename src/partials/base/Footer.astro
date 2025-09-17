@@ -1,71 +1,70 @@
-<footer class="bg-main-secondary py-10">
-  <div class="layout flex flex-col md:flex-row justify-between text-main-light">
+---
+
+const { nav_links, base } = Astro.props;
+  
+const {footer_title, footer_description, footer_text, phone, email, address, work_hours} = base
+
+---
+
+<footer class="bg-main-secondary py-10 rounded-t-2xl">
+  <div class="layout flex flex-col xl:flex-row justify-between text-main-light">
     <!-- Left section: Text and Navigation -->
-    <div class="w-full md:w-2/5 mb-6 md:mb-0">
-      <h2 class="text-3xl font-serif">СТУДИЯ МАРКЕТРИ</h2>
+    <div class="w-full xl:w-2/5 mb-6 xl:mb-0">
+      <h2 class="text-3xl font-serif">{footer_title}</h2>
       <p>
-        Производство нестандартной мебели и декоративных панелей с ручной инкрустацией.
-        Работаем с дизайнерами, архитекторами и студиями по всей России. Реализуем сложные
-        задачи в технике маркетри — точно, в срок, без компромиссов.
+        {footer_description}
       </p>
     </div>
 
     <!-- Right section: Contact Information -->
-    <div class="flex flex-col items-end w-full md:w-1/3">
-      <p class="h4">+7 999 999 99 99</p>
-      <p class="h4">STUDIO.MARQUETRY.RU</p>
+    <div class="flex flex-col items-end w-full xl:w-1/3">
+      <p class="h4">{phone}</p>
+      <p class="h4">{email}</p>
     </div>
   </div>
 
   <div class="layout mt-4 border-t-2 border-main-light pt-4 text-main-light">
-    <div class="flex flex-col md:flex-row justify-between">
+    <div class="flex flex-col xl:flex-row justify-between">
       <!-- Left section: Navigation Links -->
-      <div class="mb-4 md:mb-0">
+      <div class="mb-4 xl:mb-0">
         <span class="font-bold underline underline-offset-2">Навигация</span>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Цены</a></li>
-          <li><a href="#">Портфолио</a></li>
-          <li><a href="#">Материалы</a></li>
+          {nav_links.map(nav_link => <li><a href={nav_link.slug}>{nav_link.name}</a></li>)}
         </ul>
       </div>
 
       <!-- Right section: Contact Links -->
-      <div class="mb-4 md:mb-0">
-        <span class="font-bold underline underline-offset-2">Навигация</span>
+      <div class="mb-4 xl:mb-0">
+        <span class="font-bold underline underline-offset-2">Клиенту</span>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Цены</a></li>
-          <li><a href="#">Портфолио</a></li>
-          <li><a href="#">Материалы</a></li>
+          <li><a href="#">Скачать портфолио</a></li>
+          <li><a href="#">Скачать каталог материалов</a></li>
+          <li><a href="#">Заказать образец</a></li>
+          <li><a href="#">Получить консультацию</a></li>
         </ul>
       </div>
 
       <!-- Duplicate sections for the remaining navigation -->
-      <div class="mb-4 md:mb-0">
-        <span class="font-bold underline underline-offset-2">Навигация</span>
+      <div class="mb-4 xl:mb-0">
+        <span class="font-bold underline underline-offset-2">Информация</span>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Цены</a></li>
-          <li><a href="#">Портфолио</a></li>
-          <li><a href="#">Материалы</a></li>
+          <li><p>{address}</p></li>
+          <li><p>{work_hours}</p></li>
         </ul>
       </div>
 
       <div>
-        <span class="font-bold underline underline-offset-2">Навигация</span>
+        <span class="font-bold underline underline-offset-2">Контакты</span>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Цены</a></li>
-          <li><a href="#">Портфолио</a></li>
-          <li><a href="#">Материалы</a></li>
+          <li><a href={`tel:${phone}`}>{phone}</a></li>
+          <li><a href={`mailto:${email}`}>{email}</a></li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="layout mt-6 border-t-2 border-main-light pt-4 text-center text-main-light flex flex-col md:flex-row justify-between">
-    <p>© ООО “МАРКЕТРИ ПРОМ”</p>
-    <p>Политика конфиденциальности</p>
+  <div class="layout mt-6 border-t-2 border-main-light pt-4 text-center text-main-light flex flex-col xl:flex-row justify-between">
+    <p>{footer_text}</p>
+    <a href="#">Политика конфиденциальности</a>
   </div>
 </footer>
