@@ -39,6 +39,7 @@ export default defineConfig({
       contacts: 'components/home/Contacts',
       button: 'components/base/Button',
       social_link: 'components/base/Icon',
+      modal: 'components/base/Modal'
     },
   }), icon()],
   output: STORYBLOK_IS_PREVIEW === 'true' ? 'server' : 'static',

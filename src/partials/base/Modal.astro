@@ -1,0 +1,26 @@
+---
+
+import "../../lib/modal.css";
+
+const { id } = Astro.props;
+---
+
+<dialog {id}>
+  <div class="modal__wrap">
+    <header class="modal__header">
+      <h3 style="margin:0;font-weight:600;font-size:1.05rem">Модальное окно</h3>
+      <!-- Кнопка для закрытия модалки -->
+      <button class="modal__close" data-modal-close aria-label="Закрыть (Esc)">Закрыть</button>
+    </header>
+
+    <section class="modal__body">
+      <slot />
+    </section>
+
+    <footer class="modal__footer">
+      <button class="modal__close" data-modal-close>Готово</button>
+    </footer>
+  </div>
+</dialog>
+
+<script type="module" src="/src/lib/modal.js"></script>

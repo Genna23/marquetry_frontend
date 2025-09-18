@@ -2,21 +2,19 @@
 import { Icon } from "astro-icon/components";
 
 const {
-    href = "/",
     style = "default",
     icon = "default",
     classes = "",
+    id
 } = Astro.props;
 ---
 
-<a
-    {href}
+<button
+data-modal-open={`#${id}`}
     class="button flex items-center gap-3"
     class:list={[style ? style : "default", classes]}
 >
     <slot />
 
     {icon !== "default" ? <Icon name={icon} class="text-red-500" /> : ""}
-</a>
-
-<style></style>
+</button>

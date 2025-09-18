@@ -1,6 +1,6 @@
 ---
 
-const { video, title, description, button } = Astro.props;
+const { video, title, description, modal } = Astro.props;
 import { Icon } from "astro-icon/components";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
@@ -9,7 +9,8 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 
     <div class="layout flex flex-col-reverse xl:flex-row xl:items-center items-start xl:gap-4">
-        <StoryblokComponent classes="inline-block xl:hidden mt-4" blok={button[0]} />
+        <StoryblokComponent classes="inline-block xl:hidden mt-4" blok={modal[0]}/>
+        
         <div
             class="relative w-full xl:w-1/2 max-w-full cursor-pointer"
             id="overlay"
@@ -25,7 +26,6 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
                 Ваш браузер не поддерживает видео.
             </video>
 
-            <!-- Overlay кнопка -->
             <button
                 id="playButton"
                 class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 rounded-lg"
@@ -42,7 +42,7 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
                     {description}
                 </p>
             </div>
-            <StoryblokComponent classes="xl:inline-block hidden" blok={button[0]} />
+            <StoryblokComponent classes="xl:inline-block hidden" blok={modal[0]} />
         </div>
     </div>
 
