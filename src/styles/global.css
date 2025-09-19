@@ -25,6 +25,14 @@
   --color-main-light: #F9F4EA;
 }
 
+p[textalign="center"] {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .splide__track { height: calc(100% - 2.5rem); /* 2.5rem = ~40px на точки */ }
 
 ul.splide__pagination {

@@ -2,7 +2,7 @@
 
 const { nav_links, base } = Astro.props;
   
-const {footer_title, footer_description, footer_text, phone, email, address, work_hours} = base
+const {footer_title, footer_description, footer_text, phone, email, address, work_hours, client} = base
 
 ---
 
@@ -37,10 +37,9 @@ const {footer_title, footer_description, footer_text, phone, email, address, wor
       <div class="mb-4 xl:mb-0">
         <span class="font-bold underline underline-offset-2">Клиенту</span>
         <ul>
-          <li><a href="#">Скачать портфолио</a></li>
-          <li><a href="#">Скачать каталог материалов</a></li>
-          <li><a href="#">Заказать образец</a></li>
-          <li><a href="#">Получить консультацию</a></li>
+          {
+            client.map(item => <li><a href={item.link.cashed_url || '/'}>{item.label}</a></li>)
+          }
         </ul>
       </div>
 

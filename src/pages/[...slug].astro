@@ -39,6 +39,8 @@ export async function getStaticPaths() {
 
 const { content } = story;
 
+const { description, image, title } = content
+
 const nav_links = content.body
   .filter((e) => e.show_in_nav === true)
   .map((e) => ({
@@ -48,6 +50,6 @@ const nav_links = content.body
 
 ---
 
-<Base nav_links={nav_links} logo={getPictureValues(base.logo)} phone={base.phone} {base}>
+<Base nav_links={nav_links} logo={getPictureValues(base.logo)} phone={base.phone} {base} {description} {image} {title}>
   <StoryblokComponent blok={content} />
 </Base>

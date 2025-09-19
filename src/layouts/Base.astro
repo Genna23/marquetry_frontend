@@ -3,15 +3,39 @@ import Footer from "../partials/base/Footer.astro"
 import Navbar from "../partials/base/Navbar.astro"
 import "../styles/global.css"
 
-const { title = 'Маркетри', nav_links = [], logo, phone, base } = Astro.props
+const { title = 'Маркетри', description, image, nav_links = [], logo, phone, base } = Astro.props
+
+const siteUrl = 'https://www.yoursite.com'; 
 
 ---
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-  </head>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description || 'Default description if none provided'}>
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href={siteUrl + Astro.request.url}>
+
+  <!-- Open Graph for Social Media -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description || 'Default description if none provided'} />
+  <meta property="og:image" content={image.filename} />
+  <meta property="og:url" content={siteUrl + Astro.request.url} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Your Site Name" />
+
+  <!-- Twitter Card for Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description || 'Default description if none provided'} />
+  <meta name="twitter:image" content={image.filename} />
+  <meta name="twitter:site" content="@your_twitter_handle" />
+  <meta name="twitter:creator" content="@your_twitter_handle" />
+
+  <!-- Theme Color for Mobile -->
+  <meta name="theme-color" content="#ffffff">
+</head>
   <body>
     <main>
 
