@@ -1,25 +1,31 @@
 ---
-
 import "../../lib/modal.css";
+import Button from "./Button.astro";
 
-const { id } = Astro.props;
+const { id, blok } = Astro.props;
+
+const { title, content } = blok
+
+import { renderRichText } from "@storyblok/astro";
 ---
 
-<dialog {id}>
-  <div class="modal__wrap">
-    <header class="modal__header">
-      <h3 style="margin:0;font-weight:600;font-size:1.05rem">Модальное окно</h3>
+<dialog {id} class="modal">
+  <div>
+    <header class="p-5 flex justify-end">
       <!-- Кнопка для закрытия модалки -->
-      <button class="modal__close" data-modal-close aria-label="Закрыть (Esc)">Закрыть</button>
+      <button
+        class="button flex items-center gap-3 transperent"
+        data-modal-close
+        aria-label="Закрыть (Esc)"
+      >
+        Закрыть
+      </button>
     </header>
 
-    <section class="modal__body">
-      <slot />
+    <section class="p-5 modal__body space-y-6">
+      <h3 class="text-center">{title}</h3>
+      <div set:html={renderRichText(content)} class="space-y-4 w-full"/>
     </section>
-
-    <footer class="modal__footer">
-      <button class="modal__close" data-modal-close>Готово</button>
-    </footer>
   </div>
 </dialog>
 

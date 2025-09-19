@@ -1,10 +1,3 @@
-// Лёгкий runtime для модалок на <dialog> (без TS).
-// API: data-атрибуты и небольшой window.modal
-//   - [data-modal-open="#id"]  — открыть
-//   - [data-modal-close]       — закрыть
-//   - window.modal.open('#id')
-//   - window.modal.close('#id')
-
 (function () {
   if (typeof window === 'undefined') return;
   if (window.__modalBound) return; // защита от повторной инициализации
@@ -22,7 +15,10 @@
     dlg._lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     if (!dlg.open) dlg.showModal();
 
-    dlg.classList.remove('closing');
+    dlg.classList.remove('closing'); // Убираем класс закрытия
+
+    // Плавное появление с анимацией
+    dlg.classList.add('opening'); // Добавляем класс для открытия
 
     // Фокус внутрь
     const focusable = dlg.querySelector('[autofocus], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -41,7 +37,10 @@
 
     if (dlg._closing) return;
     dlg._closing = true;
-    dlg.classList.add('closing');
+    dlg.classList.add('closing'); // Добавляем класс для закрытия
+
+    // Убираем класс открытия
+    dlg.classList.remove('opening');
 
     const done = () => {
       dlg.classList.remove('closing');

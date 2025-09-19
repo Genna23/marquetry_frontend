@@ -8,16 +8,23 @@ dialog.modal {
   border: none;
   padding: 0;
   border-radius: 16px;
-  width: min(720px, 92vw);
-  max-height: min(88vh, 1000px);
+  width: 90vw;
+  height: 90vh;
   box-shadow: 0 30px 80px rgba(0,0,0,.25);
-  background: var(--modal-bg, #0b0d12);
-  color: var(--modal-fg, #e7ecf3);
-  overflow: hidden; /* внутренний скролл только в .modal__body */
+  background: #F9F4EA;
+  color: #383329;
+  overflow: hidden; /* Внутренний скролл только в .modal__body */
+  position: fixed; /* Фиксируем модалку по центру экрана */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрируем модалку */
+  z-index: 1000; /* Модалка будет поверх всего контента */
+  transition: opacity 0.28s, transform 0.28s;
 }
 
 /* Backdrop */
 dialog.modal::backdrop {
+  cursor: pointer;
   background: color-mix(in oklab, black 70%, transparent);
   transition: background .28s;
   transition-behavior: allow-discrete;
@@ -27,83 +34,34 @@ dialog.modal::backdrop {
 }
 
 /* Плавное появление */
+dialog.modal.opening {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(8px) scale(.985);
+  transition: opacity .28s, transform .28s;
+}
+
 dialog.modal[open] {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate(-50%, -50%) translateY(0) scale(1);
   transition: opacity .28s, transform .28s;
-  transition-behavior: allow-discrete;
-}
-@starting-style {
-  dialog.modal[open] { opacity: 0; transform: translateY(8px) scale(.985); }
 }
 
-/* Плавное закрытие (вешается JS-класс) */
+/* Плавное закрытие */
 dialog.modal.closing {
   opacity: 0;
-  transform: translateY(8px) scale(.985);
-}
-dialog.modal.closing::backdrop { background: rgba(0,0,0,0); }
-
-/* Внутренняя компоновка */
-.modal__wrap {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  max-height: inherit;
+  transform: translate(-50%, -50%) translateY(8px) scale(.985);
 }
 
-/* Шапка/футер липкие, с лёгким блюром */
-.modal__header, .modal__footer {
-  position: sticky;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  padding: 16px 18px;
-  backdrop-filter: blur(8px);
-  background: color-mix(in oklab, var(--modal-bg, #0b0d12) 92%, transparent);
+dialog.modal.closing::backdrop {
+  background: rgba(0,0,0,0);
 }
-.modal__header { top: 0; }
-.modal__footer { bottom: 0; }
 
-/* Кнопка закрытия */
-.modal__close {
-  margin-left: auto;
-  border: 0;
-  border-radius: 10px;
-  padding: 8px 12px;
-  background: color-mix(in oklab, white 12%, transparent);
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-.modal__close:hover { background: color-mix(in oklab, white 18%, transparent); }
-.modal__close:active { transform: translateY(1px); }
+
+
 
 /* Прокручиваемая зона контента */
 .modal__body {
-  overflow: auto;
+  overflow-y: auto; /* Добавляем вертикальную прокрутку */
+  max-height: 80vh; /* Ограничиваем высоту, чтобы контент не выходил за пределы */
   padding: 18px;
-}
-
-/* Типографика для richtext Storyblok */
-.modal__body .richtext {
-  line-height: 1.65;
-  font-size: 1rem;
-}
-.modal__body .richtext h1,
-.modal__body .richtext h2,
-.modal__body .richtext h3 {
-  line-height: 1.2;
-  margin: 1.2em 0 .6em;
-}
-.modal__body .richtext p { margin: .8em 0; }
-.modal__body .richtext ul, .modal__body .richtext ol { padding-left: 1.2em; margin: .8em 0; }
-.modal__body .richtext a {
-  color: #9ad0ff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.modal__body .richtext img, .modal__body .richtext iframe {
-  max-width: 100%;
-  border-radius: 10px;
 }
