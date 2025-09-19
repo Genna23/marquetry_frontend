@@ -22,6 +22,20 @@ dialog.modal {
   transition: opacity 0.28s, transform 0.28s;
 }
 
+dialog.modal.full {
+  width: 90vw;
+  height: 90vh;
+}
+
+dialog.modal.small {
+  min-width: 40vw;
+  min-height: 40vw;
+  max-width: 1200px;
+  max-height: 270px;
+}
+
+
+
 /* Backdrop */
 dialog.modal::backdrop {
   cursor: pointer;
