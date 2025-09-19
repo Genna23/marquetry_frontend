@@ -2,15 +2,16 @@
 import { Icon } from "astro-icon/components";
 
 const {
-    href = "/",
+    href,
     style = "default",
     icon = "default",
     classes = "",
 } = Astro.props;
+
 ---
 
 <a
-    {href}
+    href={href.url}
     class="button flex items-center gap-3"
     class:list={[style ? style : "default", classes]}
 >

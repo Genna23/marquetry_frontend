@@ -40,8 +40,8 @@ import Button from './Button.astro'
 
       <!-- CTA + телефон (desktop) -->
       <div class="hidden lg:flex items-center gap-12">
-        <Button href={`tel:${phone.replace(/\s+/g, '')}`} style="transperent font-semibold">Связаться</Button>
-        <a href="tel:+79993992939" class="font-semibold text-main-dark">{phone}</a>
+        <Button href="#contacts" style="transperent font-semibold">Связаться</Button>
+        <a href={`tel:${phone.replace(/\s+/g, '')}`} class="font-semibold text-main-dark">{phone}</a>
       </div>
     </div>
 
@@ -54,11 +54,11 @@ import Button from './Button.astro'
             nav_links.map(e => <li><a href={e.slug} class="block px-1 py-2 hover:opacity-70">{e.name}</a></li>)
           }
         <li class="pt-1 flex lg:hidden">
-          <a href="#contact" class="rounded-xl border border-[#2b2a27] px-5 py-2 font-semibold text-[#2b2a27] hover:bg-[#2b2a27] hover:text-white transition-colors duration-200">
+          <a href="#contacts" class="rounded-xl border border-[#2b2a27] px-5 py-2 font-semibold text-[#2b2a27] hover:bg-[#2b2a27] hover:text-white transition-colors duration-200">
             СВЯЗАТЬСЯ
           </a>
         </li>
-        <li class="flex lg:hidden"><a href="tel:+79993992939" class="block px-1 py-2">+7 999 399 29 39</a></li>
+        <li class="flex lg:hidden"><a href={`tel:${phone.replace(/\s+/g, '')}`} class="block px-1 py-2">+7 999 399 29 39</a></li>
       </ul>
     </nav>
   </div>
@@ -83,27 +83,43 @@ import Button from './Button.astro'
 
   <!-- переключение и автозакрытие по якорям -->
   <script>
-    (function () {
-      const btn  = document.getElementById('burgerBtn');
-      const menu = document.getElementById('mobileMenu');
+   (function () {
+  const btn = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  const body = document.body;
+  const menuHeight = menu.offsetHeight; // Высота открытого меню
 
-      function toggle(open) {
-        const willOpen = open ?? !btn.classList.contains('open');
-        btn.classList.toggle('open', willOpen);
-        btn.setAttribute('aria-expanded', String(willOpen));
-        menu.classList.toggle('open', willOpen);
+  function toggle(open) {
+    const willOpen = open ?? !btn.classList.contains('open');
+    btn.classList.toggle('open', willOpen);
+    btn.setAttribute('aria-expanded', String(willOpen));
+    menu.classList.toggle('open', willOpen);
+  }
+
+  btn.addEventListener('click', () => toggle());
+
+  // Закрывать по Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') toggle(false);
+  });
+
+  // Оставляем меню открытым при переходе по якорным ссылкам
+  menu.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      // Прокручиваем к нужному блоку с компенсацией высоты меню
+      const targetId = a.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        // Прокрутка с компенсацией высоты меню
+        window.scrollTo({
+          top: targetElement.offsetTop - menuHeight,
+          behavior: 'smooth'
+        });
       }
+    });
+  });
+})();
 
-      btn.addEventListener('click', () => toggle());
 
-      // Закрывать при клике по якорной ссылке
-      menu.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', () => toggle(false));
-      });
-
-      // Закрывать по Esc
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') toggle(false);
-      });
-    })();
   </script>
