@@ -4,11 +4,11 @@ import ModalButton from "../../partials/base/ModalButton.astro";
 
 const { blok, classes } = Astro.props;
 
-const { label, style, icon } = blok;
+const { label, style, icon, title, content } = blok;
 
 const id = 'modal_' + blok._uid
 
 ---
 
 <ModalButton {id} {style} {icon} {classes}>{label}</ModalButton>
-<Modal {id} {blok}/>
+<Modal {id} {title} {content}/>

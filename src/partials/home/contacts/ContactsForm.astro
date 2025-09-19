@@ -1,64 +1,90 @@
 ---
-
-import Button from "../../base/Button.astro"
-import Checkbox from "../../base/Checkbox.astro"
-
+import Button from "../../base/Button.astro";
+import Checkbox from "../../base/Checkbox.astro";
+import Modal from "../../base/Modal.astro";
 ---
 
 <div class="xl:p-10 p-5 bg-main-light rounded-2xl space-y-4">
+  <h3>Связаться с нами</h3>
 
-    <h3>Cвязаться с нами</h3>
+  <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-2">
+    <!-- скрытые служебные поля -->
+    <input type="hidden" name="form-name" value="contact" />
+    <p class="hidden">
+      <label>Не заполняйте это поле: <input name="bot-field" /></label>
+    </p>
 
-    <form name="contact" method="POST" data-netlify="true" class="space-y-2">
-  <!-- скрытые служебные поля -->
-  <input type="hidden" name="form-name" value="contact" />
-  <p class="hidden">
-    <label>Не заполняйте это поле: <input name="bot-field" /></label>
-  </p>
+    <!-- Имя -->
+    <input
+      type="text"
+      name="name"
+      id="name"
+      required
+      class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+      placeholder="Ваше имя"
+    />
 
-  <!-- Имя -->
-  <input
-    type="text"
-    name="name"
-    required
-    class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
-    placeholder="Ваше имя"
-  />
+    <!-- Телефон -->
+    <input
+      type="text"
+      name="phone"
+      id="phone"
+      required
+      class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+      placeholder="Телефон"
+    />
 
-  <!-- Телефон -->
-  <input
-    type="text"
-    name="phone"
-    required
-    class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
-    placeholder="Телефон"
-  />
+    <!-- Сообщение -->
+    <textarea
+      name="message"
+      id="message"
+      rows="5"
+      required
+      class="bg-white p-5 w-full rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
+      placeholder="Опишите задачу или проект"></textarea>
 
-  <!-- Сообщение -->
-  <textarea
-    name="message"
-    rows="5"
-    required
-    class="bg-white p-5 w-full rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
-    placeholder="Опишите задачу или проект"
-  ></textarea>
+    <Checkbox
+      id="agree"
+      name="agree"
+      required={true}
+      label="Я даю согласие на обработку моих персональных данных"
+    />
 
-  <Checkbox
-          id="agree"
-          name="agree"
-          required={true}
-          label="Я даю согласие на обработку моих персональных данных"
-        />
+    <!-- Кнопка -->
+    <button
+      type="submit"
+      class="w-full button green hover:bg-green-700"
+    >
+      Открыть
+    </button>
+  </form>
 
-  <!-- Кнопка -->
-  <button
-    type="submit"
-    class="w-full button green
-           hover:bg-green-700"
-  >
-    Отправить
-  </button>
-</form>
-
-
+  <!-- Модалка -->
+  <Modal id="modal-form" title="Форма отправлена!">
+    <p>Спасибо за ваше сообщение. Мы скоро с вами свяжемся.</p>
+  </Modal>
 </div>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+    // Проверяем, что все обязательные поля заполнены
+    const name = document.getElementById('name');
+    const phone = document.getElementById('phone');
+    const message = document.getElementById('message');
+    const agree = document.getElementById('agree');
+
+    if (name.value && phone.value && message.value && agree.checked) {
+      // Если все поля заполнены, показываем модалку
+      if (window.modal && window.modal.open) {
+        window.modal.open('#modal-form'); // Открытие модалки
+      }
+
+      // Очистить форму
+      event.target.reset();
+    } else {
+      alert("Пожалуйста, заполните все поля.");
+    }
+  });
+</script>
