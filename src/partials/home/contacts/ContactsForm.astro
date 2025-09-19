@@ -55,7 +55,7 @@ import Modal from "../../base/Modal.astro";
       type="submit"
       class="w-full button green hover:bg-green-700"
     >
-      Открыть
+      Отправить
     </button>
   </form>
 
@@ -66,25 +66,30 @@ import Modal from "../../base/Modal.astro";
 </div>
 
 <script>
-  document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Предотвращаем стандартную отправку формы
+  const handleSubmit = event => {
+    event.preventDefault();
 
-    // Проверяем, что все обязательные поля заполнены
-    const name = document.getElementById('name');
-    const phone = document.getElementById('phone');
-    const message = document.getElementById('message');
-    const agree = document.getElementById('agree');
+    const myForm = event.target;
+    const formData = new FormData(myForm);
 
-    if (name.value && phone.value && message.value && agree.checked) {
-      // Если все поля заполнены, показываем модалку
-      if (window.modal && window.modal.open) {
-        window.modal.open('#modal-form'); // Открытие модалки
-      }
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => {
+        // Открыть модалку после успешной отправки формы
+        if (window.modal && window.modal.open) {
+          window.modal.open('#modal-form'); // Открытие модалки
+        }
 
-      // Очистить форму
-      event.target.reset();
-    } else {
-      alert("Пожалуйста, заполните все поля.");
-    }
-  });
+        // Очистить форму после отправки
+        myForm.reset();
+      })
+      .catch(error => {
+        alert("Ошибка при отправке формы: " + error);
+      });
+  };
+
+  document.querySelector("form").addEventListener("submit", handleSubmit);
 </script>
