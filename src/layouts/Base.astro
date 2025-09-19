@@ -23,7 +23,7 @@ const siteUrl = 'https://www.yoursite.com';
   <meta property="og:image" content={image.filename} />
   <meta property="og:url" content={siteUrl + Astro.request.url} />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Your Site Name" />
+  <meta property="og:site_name" content={title}  />
 
   <!-- Twitter Card for Twitter -->
   <meta name="twitter:card" content="summary_large_image" />

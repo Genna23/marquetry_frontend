@@ -9,7 +9,7 @@ import Checkbox from "../../base/Checkbox.astro"
 
     <h3>Cвязаться с нами</h3>
 
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-2" netlify>
+    <form name="contact" method="POST" data-netlify="true" class="space-y-2">
   <!-- скрытые служебные поля -->
   <input type="hidden" name="form-name" value="contact" />
   <p class="hidden">
@@ -22,13 +22,14 @@ import Checkbox from "../../base/Checkbox.astro"
     name="name"
     required
     class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
-    placeholder="Ваше имя*"
+    placeholder="Ваше имя"
   />
 
   <!-- Телефон -->
   <input
     type="text"
     name="phone"
+    required
     class="p-5 w-full bg-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
     placeholder="Телефон"
   />
@@ -37,6 +38,7 @@ import Checkbox from "../../base/Checkbox.astro"
   <textarea
     name="message"
     rows="5"
+    required
     class="bg-white p-5 w-full rounded-2xl focus:outline-none focus:ring-2 focus:ring-main-secondary focus:border-main-secondary"
     placeholder="Опишите задачу или проект"
   ></textarea>
@@ -44,6 +46,7 @@ import Checkbox from "../../base/Checkbox.astro"
   <Checkbox
           id="agree"
           name="agree"
+          required={true}
           label="Я даю согласие на обработку моих персональных данных"
         />
 
