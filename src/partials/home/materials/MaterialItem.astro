@@ -7,9 +7,9 @@ const {image, title, text_style} = Astro.props
 
 ---
 
-<div class="relative rounded-2xl overflow-hidden w-full">
+<div class="relative rounded-2xl overflow-hidden w-full h-98">
   <!-- Фото -->
-  <Picture {...getPictureValues(image)} class="w-full h-auto block" />
+  <Picture {...getPictureValues(image)} class="w-full cover block" />
 
   <!-- Glass overlay -->
   <div
