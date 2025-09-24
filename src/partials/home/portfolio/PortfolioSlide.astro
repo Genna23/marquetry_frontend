@@ -1,7 +1,8 @@
 ---
 const { card } = Astro.props;
 
-const { title, preview, image, date, place, customer, button, social_links } = card;
+const { title, preview, image, date, place, customer, button, social_links } =
+    card;
 
 import { Picture } from "astro:assets";
 
@@ -13,28 +14,44 @@ import { map } from "astro:schema";
 import PortfolioFooter from "./PortfolioFooter.astro";
 ---
 
-<div class="flex xl:flex-row flex-col gap-4 cursor-pointer">
-    <div class="xl:w-1/2 w-full flex flex-col justify-between">
-        <div class="space-y-2">
-            <h3 class="xl:text-start text-center">{title}</h3>
-            <div>
-                <p><i>Дата: {date}</i></p>
-                <p><i>Место: {place}</i></p>
-                <p><i>Заказчик: {customer}</i></p>
-            </div>
-            <div set:html={renderRichText(preview)} />
-        </div>
-        <PortfolioFooter {button} {social_links} classes="hidden xl:flex"/>
+<div class="flex flex-col xl:flex-row gap-4 xl:gap-6 cursor-pointer
+            xl:h-[520px] xl:items-stretch">
+  <!-- Левая колонка -->
+  <div class="xl:w-1/2 w-full flex flex-col justify-between xl:h-full min-h-0">
+    <div class="space-y-2 overflow-hidden">
+      <h3 class="xl:text-start text-center">{title}</h3>
+      <div>
+        <p><i>Дата: {date}</i></p>
+        <p><i>Место: {place}</i></p>
+        <p><i>Заказчик: {customer}</i></p>
+      </div>
+      <div set:html={renderRichText(preview)} />
     </div>
-    <div class="xl:w-1/2 w-full flex flex-col gap-4">
-        <Picture
-            {...getPictureValues(image)}
-            class="cover max-h-full w-full rounded-2xl"
-            formats={["avif", "webp"]}
-        />
-        <PortfolioFooter {button} {social_links} classes="xl:hidden flex"/>
+    <PortfolioFooter {button} {social_links} classes="hidden xl:flex" />
+  </div>
+
+  <!-- Правая колонка -->
+  <div class="xl:w-1/2 w-full flex flex-col xl:gap-0 xl:h-full min-h-0">
+    <!-- ЕДИНАЯ ВЫСОТА НА МОБИЛЬНЫХ; НА XL тянется по высоте колонки -->
+    <div class="relative w-full overflow-hidden rounded-2xl
+                h-[530px] sm:h-[550px] md:h-[580px] lg:h-[670px] xl:h-full">
+      <Picture
+        {...getPictureValues(image)}
+        class="absolute inset-0 w-full h-full object-cover"
+        formats={["avif", "webp"]}
+      />
     </div>
+
+    <!-- На xl нет общего gap, добавляем адресный отступ только тут -->
+    <PortfolioFooter
+      {button}
+      {social_links}
+      classes="xl:hidden flex mt-4 xl:mt-6"
+    />
+  </div>
 </div>
+
+
 
 <style>
     .no-drag {
