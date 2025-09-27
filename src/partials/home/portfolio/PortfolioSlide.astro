@@ -2,7 +2,7 @@
 const { card } = Astro.props;
 
 const { title, preview, image, date, place, customer, button, social_links } =
-    card;
+  card;
 
 import { Picture } from "astro:assets";
 
@@ -14,9 +14,10 @@ import { map } from "astro:schema";
 import PortfolioFooter from "./PortfolioFooter.astro";
 ---
 
-<div class="flex flex-col xl:flex-row gap-4 xl:gap-6 cursor-pointer
-            xl:h-[770px] xl:items-stretch">
-  <!-- Левая колонка -->
+<div
+  class="flex flex-col xl:flex-row gap-4 xl:gap-6 cursor-pointer
+            xl:h-[770px] xl:items-stretch"
+>
   <div class="xl:w-1/2 w-full flex flex-col justify-between xl:h-full min-h-0">
     <div class="space-y-2 overflow-hidden">
       <h3 class="xl:text-start text-center">{title}</h3>
@@ -30,11 +31,11 @@ import PortfolioFooter from "./PortfolioFooter.astro";
     <PortfolioFooter {button} {social_links} classes="hidden xl:flex" />
   </div>
 
-  <!-- Правая колонка -->
   <div class="xl:w-1/2 w-full flex flex-col xl:gap-0 xl:h-full min-h-0">
-    <!-- ЕДИНАЯ ВЫСОТА НА МОБИЛЬНЫХ; НА XL тянется по высоте колонки -->
-    <div class="relative w-full overflow-hidden rounded-2xl
-                h-[530px] sm:h-[550px] md:h-[580px] lg:h-[670px] xl:h-full">
+    <div
+      class="relative w-full overflow-hidden rounded-2xl
+                h-[530px] sm:h-[550px] md:h-[580px] lg:h-[670px] xl:h-full"
+    >
       <Picture
         {...getPictureValues(image)}
         class="absolute inset-0 w-full h-full object-cover"
@@ -42,7 +43,6 @@ import PortfolioFooter from "./PortfolioFooter.astro";
       />
     </div>
 
-    <!-- На xl нет общего gap, добавляем адресный отступ только тут -->
     <PortfolioFooter
       {button}
       {social_links}
@@ -51,12 +51,10 @@ import PortfolioFooter from "./PortfolioFooter.astro";
   </div>
 </div>
 
-
-
 <style>
-    .no-drag {
-        user-select: text !important;
-        -webkit-user-select: text !important;
-        pointer-events: auto !important;
-    }
+  .no-drag {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    pointer-events: auto !important;
+  }
 </style>
